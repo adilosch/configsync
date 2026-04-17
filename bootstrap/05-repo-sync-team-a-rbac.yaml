@@ -58,3 +58,17 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: repo-sync-team-a-reconciler
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: repo-sync-team-b-reconciler
+  namespace: team-a
+subjects:
+  - kind: ServiceAccount
+    name: ns-reconciler-team-a-repo-sync-team-b-16
+    namespace: config-management-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: repo-sync-team-a-reconciler

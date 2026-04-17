@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: netshoot
+  name: netshoot2
   namespace: team-a
 spec:
   replicas: 1
