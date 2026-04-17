@@ -1,0 +1,46 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: repo-sync-team-a-reconciler
+  namespace: team-a
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - serviceaccounts
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - roles
+      - rolebindings
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: repo-sync-team-a-reconciler
+  namespace: team-a
+subjects:
+  - kind: ServiceAccount
+    name: ns-reconciler-team-a-repo-sync-team-a-16
+    namespace: config-management-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: repo-sync-team-a-reconciler

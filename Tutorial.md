@@ -30,6 +30,7 @@ Fuer `auth: none` muss die HTTPS-URL aus dem Kind-Cluster heraus ohne Credential
 ```text
 bootstrap/
   00-team-a-namespace.yaml
+  05-repo-sync-team-a-rbac.yaml
   10-root-sync.yaml
   20-repo-sync-team-a.yaml
 
@@ -78,8 +79,19 @@ kubectl apply -f bootstrap/
 Das erzeugt:
 
 - Namespace `team-a`
+- RBAC fuer den Namespace-Reconciler von `RepoSync/repo-sync-team-a`
 - `RootSync/root-sync-playground` im Namespace `config-management-system`
 - `RepoSync/repo-sync-team-a` im Namespace `team-a`
+
+Wichtig: Ein `RepoSync`-Reconciler bekommt nicht automatisch Rechte zum Verwalten beliebiger Ressourcen in seinem Namespace. Das Bootstrap-Manifest `05-repo-sync-team-a-rbac.yaml` bindet deshalb den ServiceAccount `config-management-system/ns-reconciler-team-a-repo-sync-team-a-16` an eine Role im Namespace `team-a`.
+
+Der Name dieses ServiceAccounts folgt aus Namespace und RepoSync-Name:
+
+```text
+ns-reconciler-<namespace>-<reposync-name>-<laenge-des-reposync-namens>
+```
+
+Wenn du den RepoSync-Namen aenderst, musst du den Subject-Namen im RoleBinding entsprechend anpassen.
 
 ## 3. Sync-Status beobachten
 
