@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: platform-settings
+  namespace: root-demo
+  labels:
+    configsync.playground/sync: rootsync
+data:
+  owner: platform-team
+  sync-type: RootSync
+  lesson: RootSync can manage cluster-scoped resources and resources in any namespace.

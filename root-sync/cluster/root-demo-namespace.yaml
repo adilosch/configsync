@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: root-demo
+  labels:
+    configsync.playground/sync: rootsync
+    configsync.playground/owner: platform

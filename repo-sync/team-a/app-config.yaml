@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: team-a
+  labels:
+    configsync.playground/sync: reposync
+data:
+  app: configsync-playground
+  owner: team-a
+  sync-type: RepoSync
+  lesson: RepoSync is namespaced and should manage resources for one namespace or tenant.
