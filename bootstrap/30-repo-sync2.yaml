@@ -1,0 +1,13 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RepoSync
+metadata:
+  name: repo-sync-team-a
+  namespace: team-a
+spec:
+  sourceFormat: unstructured
+  git:
+    repo: https://github.com/adilosch/configsync.git
+    branch: main
+    dir: repo-sync2
+    auth: none
+    period: 15s
